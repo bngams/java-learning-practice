@@ -1,12 +1,22 @@
 package com.capgemini.poecplm.programming;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.List;
 // charge la classe Scanner grâce à son nom complet
 // dès qu'on utilise une classe qui n'est pas dans le meme package on l'importe
 import java.util.Scanner;
 
 public class MyProgram {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
+		
 		// déclarer une variable
 		// <type> <nom de variable>
 		Integer a;
@@ -323,7 +333,108 @@ public class MyProgram {
 		for(String f : fruits) {
 			System.out.println(f);
 		}
+		
+		
+		// LES COLLECTIONS
+		System.out.println("== COLLECTIONS ==");
+		// Manipuler plusieurs éléments
+		// On a plusieurs formes de collections
+		
+		// rappel pour les tableaux:
+		// <type>[] <nom_variable> = new <type>[];
+		
+		
+		// pour les collections
+		// <type_de_collection><classe_utilise> <nom_variable>
+		ArrayList<String> saveurs = new ArrayList<String>();
+		saveurs.add("Chocolat");
+		saveurs.add("Fraise");
+		saveurs.add("Bonbon");
+		saveurs.add("Cafe");
+		
+		// taille de la liste
+		System.out.println("La liste est de taille " + saveurs.size());
+		
+		// indexOf()
+		System.out.println("Index de Cafe " + saveurs.indexOf("Cafe"));
+		
+		// get()
+		System.out.println("Afficher l'élement a la case 2 " + saveurs.get(2) );
+		
+		// contains()
+		System.out.println("Contient Bonbon? " + saveurs.contains("Bonbon") );
+		/*
+		 *  mécanisme du contains qui utilise equals
+		 *  for(String s : saveurs) {
+		 *    if(s.equals("Bonbon") return true;
+		 *  }
+		 */
+		
+		/*
+		 * Hashcode
+		 * hashcode()
+		 * pour chaque objet donner un numéro unique
+		 */
+		
+		// parcourir la liste
+		for(String s : saveurs) {
+			System.out.println(s);
+		}
+		
+		// un autre type de collections
+		HashSet<String> playlist = new HashSet<String>();
+		
+		// Artithmetic exception
+		// Integer myNumber = 10;
+		// System.out.println(myNumber / 0);
 
+		// LES EXCEPTIONS
+		System.out.println("== EXCEPTIONS ==");
+		Integer inputNumber = null;
+		do {		
+			Scanner scan = new Scanner(System.in);
+			System.out.println("Saisir un nombre supérieur a 10:");
+			// pour capturer et gérer une erreur on utilise un mecanisme try...catch
+			try {
+				inputNumber = scan.nextInt();
+			} catch(InputMismatchException e) {
+				System.out.println("Vous n'avez saisi un nombre correct");
+			}
+			System.out.println("Apres la saisie");
+		}while(inputNumber == null);
+		
+		// Travailler sur les fichiers
+		System.out.println("== Les fichiers ==");
+		
+		// Chemin absolu => C:/... (depuis la racine)
+		// Chemin relatif => par rapport au dossier actuel /subfolder ; ../parentfolder
+		File f = new File("myfile.txt");
+		
+		System.out.println("Ecriture du fichier");
+		// ecrire
+		try {
+			FileWriter fw = new FileWriter(f); // flux sortant
+			PrintWriter printer = new PrintWriter(fw); // ecrire dans le flux sortant
+			printer.println("Hello");
+			printer.println("Bye");
+			printer.close(); // fermer le flux
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Lecture du fichier");
+		try {
+			Scanner fileScan = new Scanner(f);
+			while(fileScan.hasNextLine()) {
+				System.out.println(fileScan.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
