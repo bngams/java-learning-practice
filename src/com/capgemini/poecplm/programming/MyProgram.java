@@ -425,10 +425,11 @@ public class MyProgram {
 		
 		System.out.println("Lecture du fichier");
 		try {
-			Scanner fileScan = new Scanner(f);
+			Scanner fileScan = new Scanner(f); // flux entrant
 			while(fileScan.hasNextLine()) {
 				System.out.println(fileScan.nextLine());
 			}
+			fileScan.close(); // fermeture du flux
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
