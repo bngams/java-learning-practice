@@ -435,7 +435,8 @@ public class MyProgram {
 			e.printStackTrace();
 		}
 		
-		
+		// new edit for git commit
+		System.out.println("git commit");
 	}
 
 }
